@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/head-imports :: links(pageTitle=${page.title})}"></div>
+<body th:object="${page}">
+<header class="nav-wrapper"><h1 th:text="*{title}">Page Title</h1></header>
+
+<div class="container">
+
+	<!--<p cms:group="groupA">Hi ya!</p>-->
+
+	<div class="row">
+		<div class="col s8">
+			<div class="pageBody">
+				<div th:if="${page.getGroup('groupB') !=null}">
+					<p><span th:text="${page.getGroup('groupB')}">get group b</span></p>
+					<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupB')})}">page body block</div>
+				</div>
+			</div>
+
+			<div class="pageBody">
+				<div th:if="${page.getGroup('groupC') !=null}">
+					<p><span th:text="${page.getGroup('groupC')}">get group c</span></p>
+					<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupC')})}">page body block</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col m4">
+			<div class="pageBody">
+				<div th:if="${page.getGroup('groupA') !=null}">
+					<p><span th:text="${page.getGroup('groupA')}">get group a</span></p>
+					<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupA')})}">page body block</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="firstBlock">
+		<ul>
+			<li th:if="${page.blocks.size gt 0}" th:each="block: ${page.blocks}">
+				<span th:text="${block.refName}">name</span> <span th:utext="${block.render()}">blockX</span>
+			</li>
+		</ul>
+	</div>
+	<hr/>
+
+</div>
+
+<footer>
+	<table class="orange-text text-orange-darken-4">
+		<tr th:each="var : ${#ctx.getVariableNames()}">
+			<td th:text="${var}"></td>
+			<td th:text="${#vars.getVariable(var)}"></td>
+		</tr>
+	</table>
+</footer>
+</body>
+</html>

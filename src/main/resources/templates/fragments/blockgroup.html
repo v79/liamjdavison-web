@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="blockgroup(group)">
+
+	<p>blockgroup <span th:text="${group.refName}">refName</span> (<span th:text="${group.blocks.size}">size</span>)</p>
+
+	<div th:each="block: ${group.blocks}">
+		<div th:insert="~{fragments/block :: blockFragment(block=${block})}">block</div>
+	</div>
+
+
+</div>
