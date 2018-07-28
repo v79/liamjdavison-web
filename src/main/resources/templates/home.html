@@ -2,7 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="~{fragments/head-imports :: links(pageTitle=${page.title})}"></div>
 <body th:object="${page}">
-<header class="nav-wrapper"><h1 th:text="*{title}">Page Title</h1></header>
+
+<header>
+	<div class="header-banner">
+		<h1>Liam John Davison</h1>
+	</div>
+	<div class="clear"></div>
+	<nav class="translucent">
+		<div class="nav-wrapper ">
+			<div class="site-title brand-logo left invisible" id="site-title">Liam John Davison</div>
+			<ul id="nav-mobile" class="right">
+				<li><a href="/archive">Archive</a></li>
+				<li><a href="/events">Events</a></li>
+				<li><a href="/login">Login</a></li>
+			</ul>
+		</div>
+	</nav>
+</header>
 
 <div class="container">
 
@@ -23,6 +39,29 @@
 					<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupC')})}">page body block</div>
 				</div>
 			</div>
+
+
+			<hr>
+			<h3>Repeating to make the page long</h3>
+			<div class="pageBody">
+				<div th:if="${page.getGroup('groupA') !=null}">
+					<p><span th:text="${page.getGroup('groupA')}">get group a</span></p>
+					<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupA')})}">page body block</div>
+				</div>
+			</div>
+			<div class="pageBody">
+				<div th:if="${page.getGroup('groupA') !=null}">
+					<p><span th:text="${page.getGroup('groupA')}">get group a</span></p>
+					<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupA')})}">page body block</div>
+				</div>
+			</div>
+			<div class="pageBody">
+				<div th:if="${page.getGroup('groupA') !=null}">
+					<p><span th:text="${page.getGroup('groupA')}">get group a</span></p>
+					<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupA')})}">page body block</div>
+				</div>
+			</div>
+
 		</div>
 
 		<div class="col m4">
@@ -33,6 +72,8 @@
 				</div>
 			</div>
 		</div>
+
+
 	</div>
 
 
@@ -47,6 +88,7 @@
 
 </div>
 
+
 <footer>
 	<table class="orange-text text-orange-darken-4">
 		<tr th:each="var : ${#ctx.getVariableNames()}">
@@ -54,6 +96,11 @@
 			<td th:text="${#vars.getVariable(var)}"></td>
 		</tr>
 	</table>
+
+	<!--Import jQuery before materialize.js-->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+	<script src="/js/ljd.js" type="text/javascript"></script>
 </footer>
 </body>
 </html>
