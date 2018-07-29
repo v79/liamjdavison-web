@@ -8,6 +8,7 @@ import org.liamjd.web.model.BlockGroup
 import org.liamjd.web.model.Page
 import kotlin.test.assertEquals
 
+/*
 class PageRenderTest: Spek({
 	val page = Page("TestPage")
 	val blockGroup = BlockGroup("firstBlock")
@@ -24,4 +25,4 @@ class PageRenderTest: Spek({
 			assertEquals(plainResult,page.render())
 		}
 	}
-})
+})*/

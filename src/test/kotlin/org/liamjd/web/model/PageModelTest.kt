@@ -6,6 +6,7 @@ import org.jetbrains.spek.api.dsl.it
 import org.liamjd.web.render.HtmlChannel
 import kotlin.test.assertEquals
 
+/*
 class PageModelTest: Spek({
 	val page = Page("TestPage")
 	val blockGroup = BlockGroup("firstBlock")
@@ -29,4 +30,4 @@ class PageModelTest: Spek({
 			assertEquals("plaintext",bG.blocks.first().type)
 		}
 	}
-})
+})*/

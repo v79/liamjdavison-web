@@ -1,22 +1,27 @@
 package org.liamjd.web.controllers
 
 import org.liamjd.web.annotations.SparkController
+import org.liamjd.web.services.DBPageService
+import org.liamjd.web.services.InMemoryPageService
 import org.liamjd.web.services.PageService
 import spark.ModelAndView
 import spark.kotlin.get
-import java.time.LocalDateTime
 
 @SparkController
 class HomeController : AbstractController(path = "/") {
 
-	val pageService = PageService()
+	val pageService: PageService
 
 
 	init {
+		// TODO this should happen via DI eventually
+		pageService = DBPageService()
 
 		val homePage = pageService.getPage("home")
 
 		get(path) {
+
+			pageService.countPages()
 
 			if (homePage != null) {
 				model.put("page", homePage)

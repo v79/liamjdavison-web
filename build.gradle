@@ -45,6 +45,9 @@ dependencies {
 	// reflections for annotation scanning
 	compile group: 'org.reflections', name: 'reflections', version: "0.9.11"
 
+	// json parsing
+	compile group: 'com.beust', name: 'klaxon', version: '3.0.1'
+
 	// testing
 	testCompile group: "org.jetbrains.kotlin", name: "kotlin-test", version: "$kotlin_version"
 	testCompile(group: "org.jetbrains.spek", name: "spek-api", version: "$spek_version") {

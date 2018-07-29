@@ -8,7 +8,7 @@ data class Block(val refName: String) {
 	private var result: String = ""
 
 	fun render(): String {
-		val split = source.split("\\w")
+	/*	val split = source.split("\\w")
 		val sb: StringBuilder = StringBuilder()
 		sb.append("<span id=$refName>")
 		for(word in split) {
@@ -21,6 +21,9 @@ data class Block(val refName: String) {
 		}
 		sb.append("</span>")
 		result = sb.toString()
-		return result.toUpperCase()
+		return result.toUpperCase()*/
+
+		return source
+
 	}
 }
