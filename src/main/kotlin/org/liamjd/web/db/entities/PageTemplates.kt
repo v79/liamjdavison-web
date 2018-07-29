@@ -25,7 +25,7 @@ class PageTemplateDB(id: EntityID<Long>) : LongEntity(id) {
 	var refName by PageTemplates.refName
 	var fileName by PageTemplates.fileName
 
-	val pages by PageEntityDB referrersOn Pages.template
+//	val pages by PageEntity referrersOn Pages.template
 }
 
 class PageTemplateDao : AbstractDao(), Dao {

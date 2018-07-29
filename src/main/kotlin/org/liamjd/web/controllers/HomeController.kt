@@ -17,9 +17,8 @@ class HomeController : AbstractController(path = "/") {
 		// TODO this should happen via DI eventually
 		pageService = DBPageService()
 
-		val homePage = pageService.getPage("home")
-
 		get(path) {
+			val homePage = pageService.getPage("home")
 
 			pageService.countPages()
 

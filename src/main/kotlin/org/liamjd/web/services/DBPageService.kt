@@ -1,11 +1,14 @@
 package org.liamjd.web.services
 
-import org.liamjd.web.db.entities.PageEntityDao
-import org.liamjd.web.db.entities.PageTemplateDao
+import org.liamjd.web.db.entities.*
 import org.liamjd.web.model.Page
 
 class DBPageService : PageService {
 
+	val blockDao = BlockDao()
+	val blockTemplateDao = BlockTemplateDao()
+	val blockGroupDao = BlockGroupDao()
+	val pageTemplateDao = PageTemplateDao()
 	val pageDao: PageEntityDao = PageEntityDao()
 
 	override fun getPage(refName: String): Page? {
