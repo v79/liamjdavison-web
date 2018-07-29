@@ -1,6 +1,7 @@
 package org.liamjd.web.services
 
 import org.liamjd.web.db.entities.PageEntityDao
+import org.liamjd.web.db.entities.PageTemplateDao
 import org.liamjd.web.model.Page
 
 class DBPageService : PageService {
@@ -8,7 +9,11 @@ class DBPageService : PageService {
 	val pageDao: PageEntityDao = PageEntityDao()
 
 	override fun getPage(refName: String): Page? {
-		return pageDao.getPage(refName)
+		val page = pageDao.getPage(refName)
+		if(page != null) {
+			return page
+		}
+		return null
 	}
 
 	override fun save(page: Page): Boolean {
@@ -22,4 +27,5 @@ class DBPageService : PageService {
 		println("$pageCount pages found")
 		return pageCount
 	}
+
 }
