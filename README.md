@@ -8,7 +8,7 @@ A City has many Users
 A User has one city
 
 A Page has many blocks
-A Block has one city
+A Block has one page
 
 
 
