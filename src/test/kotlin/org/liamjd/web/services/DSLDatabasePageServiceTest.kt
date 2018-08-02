@@ -8,15 +8,27 @@ import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
 import java.util.*
+import kotlin.reflect.KClass
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-object BlockX : LongIdTable() {
-//	val id: Column<Long> = long("id").autoIncrement().primaryKey()
+object BlockX : Table() {
+	val id: Column<Long> = long("id").autoIncrement().primaryKey()
 	val refName: Column<String> = varchar("refName",255).uniqueIndex()
 	val uuid: Column<UUID> = uuid("uuid").clientDefault { UUID.randomUUID() }
 }
 
+fun BlockX.get(resultRow: ResultRow): BlockC {
+	return BlockC(resultRow[BlockX.id],resultRow[BlockX.refName],resultRow[BlockX.uuid])
+}
+
+//fun <T> Table.get(resultRow: ResultRow, clazz: KClass<T>) : T {
+//	clazz.
+//}
+
+data class BlockC(val id: Long, val refName: String, val uuid: UUID) {
+	constructor(x: ResultRow) : this(x[BlockX.id],x[BlockX.refName],x[BlockX.uuid])
+}
 
 
 
@@ -28,12 +40,13 @@ class DSLDatabasePageServiceTest : Spek({
 	describe("Just a block") {
 		it("Create a simple block") {
 			transaction {
-				val b = BlockX.insertAndGetId {
+				val b = BlockX.insert {
 					it[refName] = "simpleBlock"
-				}.value
-				val resultRow = BlockX.select { BlockX.id eq b }.first()
+				} get BlockX.id
+				val resultRow = BlockX.select { BlockX.id eq b!! }.first()
 
-				assertEquals("simpleBlock",resultRow[BlockX.refName])
+				assertEquals("simpleBlock",BlockX.get(resultRow).refName)
+				assertEquals("simpleBlock",BlockC(resultRow).refName)
 			}
 		}
 	}
