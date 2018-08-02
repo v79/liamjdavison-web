@@ -13,6 +13,7 @@ import org.liamjd.web.db.Dao
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+/*
 object BlockTemplates : LongIdTable() {
 	val refName = varchar("refName", length=255).index(isUnique = true)
 
@@ -34,4 +35,4 @@ class BlockTemplateDao : AbstractDao(), Dao {
 			SchemaUtils.createMissingTablesAndColumns(BlockTemplates)
 			addLogger(StdOutSqlLogger) }
 	}
-}
+}*/

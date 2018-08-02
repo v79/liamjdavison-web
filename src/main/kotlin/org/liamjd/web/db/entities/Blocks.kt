@@ -10,14 +10,15 @@ import org.liamjd.web.db.Dao
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+/*
 object Blocks : LongIdTable() {
 	val refName = varchar("refName", length=255).index(isUnique = true)
 	val sourceText = text("source")
 	val uuid = uuid("uuid")
 
 	val page = optReference("page", Pages)
-	val template = reference("template",BlockTemplates)
-	val blockGroup = optReference("blockGroup",BlockGroups)
+//	val template = reference("template",BlockTemplates)
+//	val blockGroup = optReference("blockGroup",BlockGroups)
 }
 
 class BlockEntity(id: EntityID<Long>) : LongEntity(id) {
@@ -26,8 +27,8 @@ class BlockEntity(id: EntityID<Long>) : LongEntity(id) {
 	var refName by Blocks.refName
 	var sourceText by Blocks.sourceText
 
-	var template by BlockEntity referencedOn Blocks.template
-//	var page by PageEntity optionalReferencedOn Pages.blocks
+//	var template by BlockEntity referencedOn Blocks.template
+//	var page by PageEntity referrersOn  Pages.blocks
 }
 
 class BlockDao : AbstractDao(), Dao {
@@ -40,3 +41,4 @@ class BlockDao : AbstractDao(), Dao {
 			addLogger(StdOutSqlLogger) }
 	}
 }
+*/

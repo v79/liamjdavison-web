@@ -13,6 +13,7 @@ import org.liamjd.web.db.Dao
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+/*
 object BlockGroups : LongIdTable() {
 	val refName = varchar("refName", length = 255).index(isUnique = true)
 }
@@ -23,7 +24,7 @@ class BlockGroupEntity(id: EntityID<Long>) : LongEntity(id) {
 	var refName by BlockGroups.refName
 
 	// blockgroup has 0 or more blocks
-	var blocks by BlockEntity optionalReferencedOn Blocks.blockGroup
+//	var blocks by BlockEntity optionalReferencedOn Blocks.blockGroup
 
 }
 
@@ -37,4 +38,4 @@ class BlockGroupDao : AbstractDao(), Dao {
 			addLogger(StdOutSqlLogger)
 		}
 	}
-}
+}*/

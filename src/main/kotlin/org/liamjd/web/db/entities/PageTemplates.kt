@@ -13,6 +13,7 @@ import org.liamjd.web.db.Dao
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+/*
 object PageTemplates : LongIdTable() {
 	val refName = varchar("refName",length=255).index(isUnique = true)
 	val fileName = varchar("fileName",length=255).index(isUnique=true)
@@ -35,7 +36,7 @@ class PageTemplateDao : AbstractDao(), Dao {
 	init {
 		transaction {
 			addLogger(StdOutSqlLogger)
-			SchemaUtils.create(PageTemplates)
+//			SchemaUtils.create(PageTemplates)
 			SchemaUtils.createMissingTablesAndColumns(PageTemplates)
 		}
 	}
@@ -49,4 +50,4 @@ class PageTemplateDao : AbstractDao(), Dao {
 		}
 		return ""
 	}
-}
+}*/

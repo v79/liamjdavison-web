@@ -19,6 +19,7 @@ import java.time.LocalDateTime
  * In the Object, declare all the columns of the table
  * Foreign keys are 'reference' or 'optReference' if nullable
  */
+/*
 object Pages : LongIdTable() {
 	val createdOn = datetime("createdOn").default(DateTime.now())
 	val title = varchar("title", length = 1023).index(isUnique = false)
@@ -27,13 +28,15 @@ object Pages : LongIdTable() {
 	val dirty = bool("dirty")
 
 //	val template = reference("template", PageTemplates)
-//	val blocks = optReference("blocks", Blocks)
+//	val blocks = reference("blocks", Blocks)
 }
 
+*/
 /**
  * In the class, all the columns are vars by Object
  * Then list all the foreign get references using 'referencedOn' and 'optionalReferencedOn'
- */
+ *//*
+
 class PageEntity(id: EntityID<Long>) : LongEntity(id) {
 	companion object : LongEntityClass<PageEntity>(Pages)
 
@@ -47,13 +50,13 @@ class PageEntity(id: EntityID<Long>) : LongEntity(id) {
 //	var template by PageTemplateDB referencedOn Pages.template
 
 	// page has 0 or more blocks
-//	var blocks by BlockEntity optionalReferencedOn Blocks.page
+//	var blocks by BlockEntity referencedOn Pages.blocks
 
 
 	init {
 		subscribe { action ->
 			if (action.changeType == EntityChangeType.Created) {
-				println("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬ saving a page in db ``````````")
+				println("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬ saving ${action.entityClass} in db \"¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬")
 			}
 		}
 	}
@@ -116,9 +119,11 @@ class PageEntityDao : AbstractDao(), Dao {
 		page.title = entity.title
 
 		//TODO is thiis how I really want to do this?
-		/*page.templateName = transaction {
+		*/
+/*page.templateName = transaction {
 			pageTemplateDao.getTemplateFilename(entity.template.refName)
-		}*/
+		}*//*
+
 		// eeek!
 		val block = Block("block1")
 //		block.source = entity.sourceText
@@ -127,5 +132,6 @@ class PageEntityDao : AbstractDao(), Dao {
 		return page
 	}
 }
+*/
 
 
