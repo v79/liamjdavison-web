@@ -2,10 +2,9 @@ package org.liamjd.web.model
 
 import java.util.*
 
-class Page (val refName: String) {
+class Page (val refName: String, val uuid: UUID) {
 	var title: String = ""
 	var templateName = "home"
-	val uuid: UUID = UUID.randomUUID()
 	val blocks = mutableListOf<Block>()
 	val blockGroups = mutableListOf<BlockGroup>()
 

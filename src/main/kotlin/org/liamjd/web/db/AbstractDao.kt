@@ -1,6 +1,11 @@
 package org.liamjd.web.db
 
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.StdOutSqlLogger
+import org.jetbrains.exposed.sql.addLogger
+import org.jetbrains.exposed.sql.transactions.transaction
+import org.liamjd.web.db.entities.*
 import org.slf4j.LoggerFactory
 
 object dbConnections {
@@ -24,5 +29,10 @@ abstract class AbstractDao : Dao {
 		daoLogger.info("Connecting to DB: ${dbConnectionString}${dbName}")  // ?user=${dbUser}&password=${dbPassword}
 		daoLogger.info("Using driver: ${dbDriver}")
 		Database.connect(url = dbConnectionString + dbName, user = dbUser, password = dbPassword, driver = dbDriver)
+
+		transaction {
+			addLogger(StdOutSqlLogger)
+//			SchemaUtils.createMissingTablesAndColumns(PAGE, PAGE_TEMPLATE, BLOCK, BLOCK_TEMPLATE, BLOCK_GROUP)
+		}
 	}
 }
