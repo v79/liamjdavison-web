@@ -5,8 +5,8 @@ import java.util.*
 class Page (val refName: String, val uuid: UUID) {
 	var title: String = ""
 	var templateName = "home"
-	val blocks = mutableListOf<Block>()
-	val blockGroups = mutableListOf<BlockGroup>()
+	var blocks = mutableListOf<Block>()
+	var blockGroups = mutableListOf<BlockGroup>()
 
 	override fun toString(): String {
 		return "Page '$refName' [title=$title, uuid=$uuid, block count=${blocks.size}, block group count=${blockGroups.size}"

@@ -29,7 +29,7 @@ class HomeController : AbstractController(path = "/") {
 			}
 		}
 
-		get("pages/:pageName") {
+		get("/:pageName") {
 			val page = pageService.getPage(request.params("pageName"))
 			if(page != null) {
 				model.put("page", page)

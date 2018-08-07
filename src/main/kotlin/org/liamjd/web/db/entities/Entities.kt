@@ -25,6 +25,11 @@ fun Instant.toDateTime(): DateTime {
 	return DateTime(this.toEpochMilli())
 }
 
+object BLOCK_TYPE : LongIdTable() {
+	val refName = varchar("ref_name", 255).uniqueIndex()
+	val description = varchar("description",1023)
+}
+
 object BLOCK : LongIdTable() {
 	val refName = varchar("ref_name", 255).uniqueIndex()
 	val uuid = uuid("uuid").clientDefault { UUID.randomUUID() }
@@ -34,6 +39,7 @@ object BLOCK : LongIdTable() {
 	val page = reference("page",PAGE,onDelete = ReferenceOption.CASCADE)
 	val group = optReference("group",BLOCK_GROUP,onDelete = ReferenceOption.CASCADE)
 	val template = reference("template",BLOCK_TEMPLATE)
+	val type = reference("type",BLOCK_TYPE)
 
 	val content = text("content")
 }

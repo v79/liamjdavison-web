@@ -1,29 +1,11 @@
 package org.liamjd.web.model
 
+import org.liamjd.web.model.ref.BlockType
 import java.util.*
 
-data class Block(val refName: String) {
-	val uuid: UUID = UUID.randomUUID()
-	var source: String = ""
-	private var result: String = ""
+data class Block(val refName: String, val uuid: UUID, val type: BlockType, var content: String) {
 
 	fun render(): String {
-	/*	val split = source.split("\\w")
-		val sb: StringBuilder = StringBuilder()
-		sb.append("<span id=$refName>")
-		for(word in split) {
-			if(Math.random() < 0.5) {
-				sb.append("<strong>$word</strong>")
-			} else {
-				sb.append("<em>$word</em>")
-			}
-			sb.append(" ")
-		}
-		sb.append("</span>")
-		result = sb.toString()
-		return result.toUpperCase()*/
-
-		return source
-
+		return type.renderer.render(content)
 	}
 }

@@ -15,6 +15,7 @@ class Blocks(id: EntityID<Long>) : LongEntity(id) {
 	var page by Pages referencedOn BLOCK.page
 	var group by BlockGroups optionalReferencedOn BLOCK.group
 	var template by BlockTemplates referencedOn BLOCK.template
+	var type by BlockTypes referencedOn BLOCK.type
 
 	var content by BLOCK.content
 }

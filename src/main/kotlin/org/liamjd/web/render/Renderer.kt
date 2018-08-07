@@ -1,5 +1,6 @@
 package org.liamjd.web.render
 
+// For now, this will only render to one channel, HTML. Others may follow
 interface Renderer {
-	val name: String
+	fun render(content: String): String
 }

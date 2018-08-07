@@ -19,7 +19,7 @@ abstract class AbstractController(path: String) {
 		this.path = path
 
 		before {
-
+			logger.info("Request for " + request.pathInfo())
 		}
 
 		after {

@@ -1,5 +1,6 @@
 package org.liamjd.web.db.dao
 
+import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.liamjd.web.db.AbstractDao
@@ -34,6 +35,28 @@ class PageDAO : AbstractDao(), Dao {
 		}
 		return groupSet
 	}
+
+	fun getBlocks(page: Pages): Set<Blocks> {
+		val blockSet = mutableSetOf<Blocks>()
+		transaction {
+			val blocks = BLOCK.innerJoin(PAGE)
+					.slice(BLOCK.columns)
+					.select { BLOCK.page eq page.id and BLOCK.group.isNull() }
+			if (blocks.count() != 0) {
+				blocks.forEach {
+					blockSet.add(Blocks.wrapRow(it))
+				}
+			}
+		}
+		return blockSet
+	}
+
+	private fun getBlockType(typeId: Long): BlockTypes = transaction { BlockTypes.findById(typeId)!! }
+
+	fun getBlockType(blocks: Blocks): BlockTypes =
+			transaction {
+				getBlockType(blocks.type.id.value)
+			}
 
 	fun countPages(): Int = transaction { Pages.count() }
 }
