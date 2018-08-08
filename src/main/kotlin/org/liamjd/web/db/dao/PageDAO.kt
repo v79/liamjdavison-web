@@ -21,6 +21,7 @@ class PageDAO : AbstractDao(), Dao {
 	fun getBlockGroups(page: Pages): Set<BlockGroups> {
 		val groupSet = mutableSetOf<BlockGroups>()
 		transaction {
+			addLogger(StdOutSqlLogger)
 			val groups =
 					BLOCK_GROUP.innerJoin(PAGE)
 							.slice(BLOCK_GROUP.columns)
@@ -38,6 +39,7 @@ class PageDAO : AbstractDao(), Dao {
 	fun getBlocks(page: Pages): Set<Blocks> {
 		val blockSet = mutableSetOf<Blocks>()
 		transaction {
+			addLogger(StdOutSqlLogger)
 			val blocks = BLOCK.innerJoin(PAGE)
 					.slice(BLOCK.columns)
 					.select { BLOCK.page eq page.id and BLOCK.group.isNull() }
@@ -53,9 +55,10 @@ class PageDAO : AbstractDao(), Dao {
 	fun getBlockType(blocks: Blocks): BlockTypes? {
 		var types: BlockTypes? = null
 		transaction {
+			addLogger(StdOutSqlLogger)
 			val result = BLOCK_TYPE.innerJoin(BLOCK)
 					.slice(BLOCK_TYPE.columns)
-					.select { BLOCK_TYPE.id eq BLOCK.type }
+					.select { BLOCK_TYPE.id eq blocks.type.id }
 					.firstOrNull()
 			if(result != null) {
 				types = BlockTypes.wrapRow(result)
