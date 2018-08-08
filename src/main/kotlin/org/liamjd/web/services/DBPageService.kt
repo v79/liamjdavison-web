@@ -43,7 +43,9 @@ class DBPageService : PageService {
 	private fun toModel(found: Set<Blocks>): MutableList<Block> {
 		val modelBlocks = mutableListOf<Block>()
 		for(b in found) {
-			val block = Block(b.refName, b.uuid, getBlockType(b),b.content)
+			val blockTypes = pageDAO.getBlockType(b)
+			val type = toBlockTypeModel(blockTypes!!)
+			val block = Block(b.refName, b.uuid, type ,b.content)
 
 			modelBlocks.add(block)
 		}
@@ -51,9 +53,8 @@ class DBPageService : PageService {
 		return modelBlocks
 	}
 
-
-	private fun getBlockType(blocks: Blocks): BlockType {
-		val type = pageDAO.getBlockType(blocks)
-		return BlockType(type.refName,type.description)
+	private fun toBlockTypeModel(type: BlockTypes) : BlockType {
+		return BlockType(type.refName, type.description)
 	}
+
 }

@@ -2,9 +2,10 @@ package org.liamjd.web.render.html
 
 import org.liamjd.web.model.Block
 import org.liamjd.web.render.HtmlResult
+import org.liamjd.web.render.Renderer
 
-class PlainTextRender : org.liamjd.web.render.Renderer {
+class MarkdownRenderer : Renderer {
 	override fun render(block: Block): HtmlResult {
-		return "<p>${block.refName} : ${block.content}</p>"
+		return "This is a markdown block -> ${block.content}"
 	}
 }
