@@ -24,3 +24,14 @@ window.onscroll = function (el) {
 
 	}
 };
+
+// in umbrella, the target of the event is 'this'
+u('#login').on('click', function(event) {
+	showModal(u(this.dataset.modal))
+	// alert("this.dataset.modal: " + this.dataset.modal);
+});
+
+function showModal(element) {
+	console.log("showing u(element) " + u(element));
+	u( element).style.display = 'block';
+}
