@@ -61,27 +61,26 @@ function validate(validatorPath, formName, containerDiv, redirectPath) {
 		method: 'post',
 		data: serializedData,
 		success: function (response, statusText, xhr) {
-			console.log("response: " + response);
-			console.log("statusText: " + statusText);
-			console.log("xhr: " + xhr);
+			// console.log("response: " + response);
+			// console.log("statusText: " + statusText);
+			// console.log("xhr: " + xhr);
 			if(typeof response=="object") {
-				console.log("It's probably JSON!");
+				// console.log("It's probably JSON!");
 				// var errorMap = JSON.parse(response);
 				// console.log(JSON.stringify(errorMap));
 
-				console.log("response['errors'][0]" + response['errors'][0]);
+				for(let e of response['errors']) {
+					let field = e['field'];
+					let message = e['message'];
+					console.log("setting " + field  + " -> " + message);
+					$('#' + field).get(0).setCustomValidity(message);
+					$('#' + field + '~ p').html(message);
+				}
+
 
 			} else {
 				// if valid, move on to next action
 				window.location.href = redirectPath
-			}
-
-
-			if (!response) {
-
-			} else {
-				// if in error, form should be re-rendered
-				$('#' + containerDiv).html(response);
 			}
 		}
 	});

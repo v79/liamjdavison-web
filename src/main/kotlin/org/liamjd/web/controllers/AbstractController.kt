@@ -13,19 +13,21 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine
 fun MutableMap<String, String>.toJson(): String {
 	var sb = StringBuilder()
 	sb.append("{")
-	sb.append("\"errors\": {")
+	sb.append("\"errors\": [")
 	val size = this.keys.size
 	var count = 0
 	this.forEach {
 		count++
-		sb.append("\"${it.key}\": ")
-		sb.append("\"${it.value}\"")
+		sb.append("{")
+		sb.append("\"field\": \"${it.key}\", ")
+		sb.append("\"message\": \"${it.value}\"")
+		sb.append("}")
+
 		if (count != size) {
 			sb.append(",")
 		}
 	}
-	sb.append("}")
-	sb.append("}")
+	sb.append("]}")
 
 	return sb.toString()
 }
