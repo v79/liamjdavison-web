@@ -1,39 +1,25 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <header>
 	<div class="header-banner">
-		<h1>Liam John Davison</h1>
+		<h1 class="hide-on-mobile">Liam John Davison</h1>
 	</div>
 	<div class="clear"></div>
 	<nav class="translucent">
-		<div class="nav-wrapper ">
-			<div class="site-title invisible" id="site-title">Liam John Davison</div>
-			<ul id="nav-mobile" class="right">
-				<li><a href="/archive">Archive</a></li>
-				<li><a href="/events">Events</a></li>
-				<li><a data-modal="login_modal" id="login" class="js-open-modal">Login</a></li>
-			</ul>
-		</div>
-	</nav>
-
-	<div id="login_modal" class="ff-modal-wrapper">
-		<div class="ff-modal-overlay">
-			<div class="ff-modal-content">
-				<div class="row">
-					<div class="">
-						<a data-modal="login_modal" class="js-close-modal">X</a>
-						<form id="login_form" class="ff-form">
-							<div class="ff-form-unit">
-								<input class="ff-input" placeholder=" " type="text" id="username"/>
-								<label for="username">Username</label>
-							</div>
-							<div class="ff-form-unit">
-								<input class="ff-input" placeholder=" " type="password" id="password"/>
-								<label for="password">Password</label>
-							</div>
-							<div class="ff-button text-indigo-80" onclick="authenticate();">Login</div>
-						</form>
-					</div>
+		<div class="nav-wrapper">
+			<div class="row">
+				<div class="portion one-fourth one-eighth-on-mobile padding-bottom-none padding-top-none">
+					<h3 class="site-title invisible text-white" id="site-title">Liam John Davison</h3>
+				</div>
+				<div class="portion two-thirds pull-right padding-bottom-none padding-top-none">
+					<ul id="nav-mobile">
+						<li><a href="/archive">Archive</a></li>
+						<li><a href="/events">Events</a></li>
+						<li><a data-modal="login_modal" id="login" class="js-open-modal">Login</a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
-	</div>
+	</nav>
 </header>
+
+<div th:replace="~{fragments/login-modal-dialog}"></div>
