@@ -4,14 +4,14 @@ Should be equal the the height of the header
 ========================================== */
 
 window.onscroll = function (el) {
-	var nav = u('nav');
+	var nav = $('nav');
 	if (window.pageYOffset >= 240) {
 		// we have scrolled down the page
 		nav.addClass('fixed-header');
 		nav.removeClass('translucent');
 		nav.addClass('opaque');
 
-		u('#site-title').removeClass('invisible');
+		$('#site-title').removeClass('invisible');
 
 	}
 	else {
@@ -20,18 +20,24 @@ window.onscroll = function (el) {
 		nav.addClass('translucent');
 		nav.removeClass('opaque');
 
-		u('#site-title').addClass('invisible');
+		$('#site-title').addClass('invisible');
 
 	}
 };
 
-// in umbrella, the target of the event is 'this'
-u('#login').on('click', function(event) {
-	showModal(u(this.dataset.modal))
-	// alert("this.dataset.modal: " + this.dataset.modal);
+$('#login').click(function() {
+	var showThis = this.dataset.modal;
+	showModal(showThis);
 });
 
-function showModal(element) {
-	console.log("showing u(element) " + u(element));
-	u( element).style.display = 'block';
+$('.js-close-modal').click(function() {
+	var closeThis = this.dataset.modal;
+	hideModal(closeThis);
+})
+function showModal(modalName) {
+	$('#' + modalName).addClass('active');
+}
+
+function hideModal(modalName) {
+	$('#' + modalName).removeClass('active');
 }

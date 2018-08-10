@@ -16,15 +16,24 @@
 
 	<div id="login_modal" class="ff-modal-wrapper">
 		<div class="ff-modal-overlay">
-		<div class="ff-modal-content">
-			<form id="login_form">
-				<label for="username">Username</label>
-				<input type="text" id="username"/>
-				<label for="password">Password</label>
-				<input type="password" id="password"/>
-				<div class="button" onclick="authenticate();">Login</div>
-			</form>
-		</div>
+			<div class="ff-modal-content">
+				<div class="row">
+					<div class="">
+						<a data-modal="login_modal" class="js-close-modal">X</a>
+						<form id="login_form" class="ff-form">
+							<div class="ff-form-unit">
+								<input class="ff-input" placeholder=" " type="text" id="username"/>
+								<label for="username">Username</label>
+							</div>
+							<div class="ff-form-unit">
+								<input class="ff-input" placeholder=" " type="password" id="password"/>
+								<label for="password">Password</label>
+							</div>
+							<div class="ff-button text-indigo-80" onclick="authenticate();">Login</div>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </header>
