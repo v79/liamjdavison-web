@@ -40,7 +40,6 @@ abstract class AbstractController(path: String) {
 	open var path: String = path
 
 	protected val engine: ThymeleafTemplateEngine = ThymeleafTemplateEngine()
-
 	val model: MutableMap<String, Any> = hashMapOf<String, Any>()
 
 	open val authService = FakeAuthService()

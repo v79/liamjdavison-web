@@ -14,12 +14,9 @@
 					<ul id="nav-mobile">
 						<li><a href="/about">About Me</a></li>
 						<li><a href="/events">Events</a></li>
-
-						<li th:text="${#session}">session</li>
-
-						<!--<li><a th:if="${session.containsKey('user')}" href="/auth/user" th:text="${session.user}" id="nav_username">username</a>
-							<a th:if="${not session..containsKey('user')} == null" data-modal="login_modal" id="login" class="js-open-modal">Login</a>
-						</li>-->
+						<li><a data-modal="login_modal" id="login" class="js-open-modal">Login</a></li>
+						<!--<li><a th:if="${session.attribute('user') != null}" href="/auth/user" th:text="${session.attribute('user')}" id="nav_username">username</a>
+						<a th:if="${session.attribute('user') == null}" data-modal="login_modal" id="login" class="js-open-modal">Login</a>-->
 					</ul>
 				</div>
 			</div>

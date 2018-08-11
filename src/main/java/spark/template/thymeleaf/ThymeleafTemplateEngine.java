@@ -61,6 +61,7 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
      */
     public ThymeleafTemplateEngine(String prefix, String suffix) {
         ITemplateResolver defaultTemplateResolver = createDefaultTemplateResolver(prefix, suffix);
+
         initialize(defaultTemplateResolver);
     }
 
@@ -137,6 +138,7 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
         if (model instanceof Map) {
             Context context = new Context(locale);
             context.setVariables((Map<String, Object>) model);
+
             return templateEngine.process(modelAndView.getViewName(), context);
         } else {
             throw new IllegalArgumentException("modelAndView.getModel() must return a java.util.Map");
@@ -159,6 +161,7 @@ public class ThymeleafTemplateEngine extends TemplateEngine {
         if (model instanceof Map) {
             Context context = new Context(locale);
             context.setVariables((Map<String, Object>) model);
+
             return templateEngine.process(modelAndView.getViewName(), fragments, context);
         } else {
             throw new IllegalArgumentException("modelAndView.getModel() must return a java.util.Map");
