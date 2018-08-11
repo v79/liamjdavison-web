@@ -1,6 +1,7 @@
 package org.liamjd.web.services
 
 import org.liamjd.web.model.Page
+import org.liamjd.web.model.PageTemplate
 
 interface PageService {
 	fun getPage(refName: String): Page?
@@ -8,4 +9,6 @@ interface PageService {
 	fun save(page: Page) : Boolean
 
 	fun countPages() : Int
+
+	fun getPageTemplates() : List<PageTemplate>
 }

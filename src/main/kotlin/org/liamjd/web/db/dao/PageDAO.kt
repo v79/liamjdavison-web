@@ -1,6 +1,8 @@
 package org.liamjd.web.db.dao
 
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.liamjd.web.db.AbstractDao
 import org.liamjd.web.db.Dao
@@ -21,7 +23,7 @@ class PageDAO : AbstractDao(), Dao {
 	fun getBlockGroups(page: Pages): Set<BlockGroups> {
 		val groupSet = mutableSetOf<BlockGroups>()
 		transaction {
-			addLogger(StdOutSqlLogger)
+//			addLogger(StdOutSqlLogger)
 			val groups =
 					BLOCK_GROUP.innerJoin(PAGE)
 							.slice(BLOCK_GROUP.columns)
@@ -39,7 +41,7 @@ class PageDAO : AbstractDao(), Dao {
 	fun getBlocks(page: Pages): Set<Blocks> {
 		val blockSet = mutableSetOf<Blocks>()
 		transaction {
-			addLogger(StdOutSqlLogger)
+//			addLogger(StdOutSqlLogger)
 			val blocks = BLOCK.innerJoin(PAGE)
 					.slice(BLOCK.columns)
 					.select { BLOCK.page eq page.id and BLOCK.group.isNull() }
@@ -55,7 +57,7 @@ class PageDAO : AbstractDao(), Dao {
 	fun getBlockType(blocks: Blocks): BlockTypes? {
 		var types: BlockTypes? = null
 		transaction {
-			addLogger(StdOutSqlLogger)
+//			addLogger(StdOutSqlLogger)
 			val result = BLOCK_TYPE.innerJoin(BLOCK)
 					.slice(BLOCK_TYPE.columns)
 					.select { BLOCK_TYPE.id eq blocks.type.id }
@@ -67,7 +69,15 @@ class PageDAO : AbstractDao(), Dao {
 		return types
 	}
 
-
-
 	fun countPages(): Int = transaction { Pages.count() }
+
+	fun getAllTemplates() : List<PageTemplates> {
+		var list = listOf<PageTemplates>()
+		transaction {
+			val result = PAGE_TEMPLATE.selectAll()
+			list = PageTemplates.wrapRows(result).toList()
+		}
+
+		return list
+	}
 }

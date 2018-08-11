@@ -1,6 +1,7 @@
 package org.liamjd.web.controllers
 
 import org.liamjd.caisson.extensions.bind
+import org.liamjd.web.annotations.AsJSON
 import org.liamjd.web.annotations.SparkController
 import org.liamjd.web.model.security.AuthUser
 import org.liamjd.web.services.auth.FakeAuthService
@@ -22,6 +23,8 @@ class SecurityController : AbstractController("/auth") {
 			"login please"
 		}
 
+
+		@AsJSON
 		post(path + "/validateLogin") {
 			debugParams(request)
 			val userDetails = request.bind<AuthUser>()

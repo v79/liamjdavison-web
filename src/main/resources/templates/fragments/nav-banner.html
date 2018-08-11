@@ -7,14 +7,17 @@
 	<nav class="translucent">
 		<div class="nav-wrapper">
 			<div class="row">
-				<div class="portion one-fourth one-eighth-on-mobile padding-bottom-none padding-top-none">
+				<div class="portion one-fourth one-sixth-on-mobile padding-bottom-none padding-top-none">
 					<h3 class="site-title invisible text-white" id="site-title">Liam John Davison</h3>
 				</div>
 				<div class="portion pull-right padding-bottom-none padding-top-none">
 					<ul id="nav-mobile">
-						<li><a href="/about">About Me</a></li>
-						<li><a href="/events">Events</a></li>
-						<li><a data-modal="login_modal" id="login" class="js-open-modal">Login</a></li>
+						<li class="nav-item"><a href="/about">About Me</a></li>
+						<li class="nav-item"><a href="/events">Events</a></li>
+						<!--<li><a data-modal="login_modal" id="login" class="js-open-modal">Login</a></li>-->
+						<li class="nav-item"><a th:if="${__user != null}" href="/auth/user" th:text="${__user}" id="nav_username">username</a>
+							<a th:if="${__user == null}" data-modal="login_modal" id="login" class="js-open-modal">Login</a>
+						</li>
 						<!--<li><a th:if="${session.attribute('user') != null}" href="/auth/user" th:text="${session.attribute('user')}" id="nav_username">username</a>
 						<a th:if="${session.attribute('user') == null}" data-modal="login_modal" id="login" class="js-open-modal">Login</a>-->
 					</ul>
@@ -24,4 +27,6 @@
 	</nav>
 </header>
 
+<div th:include="~{fragments/edit/nav-edit}"></div>
+<div th:replace="~{fragments/edit/new-page-modal}"></div>
 <div th:replace="~{fragments/login-modal-dialog}"></div>

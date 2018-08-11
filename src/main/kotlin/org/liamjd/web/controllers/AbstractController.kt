@@ -3,6 +3,7 @@ package org.liamjd.web.controllers
 import org.liamjd.web.services.auth.FakeAuthService
 import org.slf4j.LoggerFactory
 import spark.Request
+import spark.Session
 import spark.kotlin.after
 import spark.kotlin.before
 import spark.kotlin.notFound
@@ -49,9 +50,15 @@ abstract class AbstractController(path: String) {
 		before {
 			logger.info("Request for " + request.pathInfo())
 			logger.info("Session user is " + session().attribute("user"))
+
+			debugSession(session())
+
 			if(!session().attribute<String>("user").isNullOrBlank()) {
-				val user = authService.getUser(session().attribute("user"))
-				user?.username?.let { model.put("¤¤user¤¤", it) }
+//				val user = authService.getUser(session().attribute("user"))
+//				user?.username?.let { model.put("¤¤user¤¤", it) }
+				model.put("__user",session().attribute("user"))
+			} else {
+				model.remove("__user")
 			}
 		}
 
@@ -66,6 +73,14 @@ abstract class AbstractController(path: String) {
 	fun debugParams(request: Request) {
 		request.params().forEach {
 			logger.debug("Param ${it.key} -> ${it.value}")
+		}
+	}
+
+	fun debugSession(session: Session) {
+		logger.info("Session id ${session.id()}")
+		logger.info("Session created at ${session.creationTime()}")
+		session.attributes().forEach {
+			logger.info("Session attr ${it}")
 		}
 	}
 }

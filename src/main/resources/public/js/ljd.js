@@ -3,6 +3,7 @@ scrollTop() >= 300
 Should be equal the the height of the header
 ========================================== */
 
+/** Primary layout stuff **/
 window.onscroll = function (el) {
 	var nav = $('nav');
 	if (window.pageYOffset >= 240) {
@@ -25,11 +26,27 @@ window.onscroll = function (el) {
 	}
 };
 
+/** Primary navigation menu **/
 $('#login').click(function () {
 	var showThis = this.dataset.modal;
 	showModal(showThis);
 });
 
+function authenticate() {
+	validate("/auth/validateLogin", "login_form", "login_form_validate", "/");
+}
+
+/** Page creation and editing menu **/
+$('#editnav_newPage').click(function () {
+	var showThis = this.dataset.modal;
+	$.ajax({
+		url: "/edit/getPageTemplates",
+		method: 'get'
+	});
+	showModal(showThis)
+});
+
+/** Modal functions **/
 $('.js-close-modal').click(function () {
 	var closeThis = this.dataset.modal;
 	hideModal(closeThis);
@@ -43,11 +60,7 @@ function hideModal(modalName) {
 	$('#' + modalName).removeClass('active');
 }
 
-function authenticate() {
-	validate("/auth/validateLogin", "login_form", "login_form_validate", "/");
-}
-
-
+/** Form validation and submission **/
 // Call the validation route given in validatorPath to validate the form in formName.
 // If validation fails, update containerDiv through AJAX.
 // If it succeeds, redirect to the given route
@@ -61,13 +74,7 @@ function validate(validatorPath, formName, containerDiv, redirectPath) {
 		method: 'post',
 		data: serializedData,
 		success: function (response, statusText, xhr) {
-			// console.log("response: " + response);
-			// console.log("statusText: " + statusText);
-			// console.log("xhr: " + xhr);
 			if(typeof response=="object") {
-				// console.log("It's probably JSON!");
-				// var errorMap = JSON.parse(response);
-				// console.log(JSON.stringify(errorMap));
 
 				for(let e of response['errors']) {
 					let field = e['field'];
@@ -76,7 +83,6 @@ function validate(validatorPath, formName, containerDiv, redirectPath) {
 					$('#' + field).get(0).setCustomValidity(message);
 					$('#' + field + '~ p').html(message);
 				}
-
 
 			} else {
 				// if valid, move on to next action

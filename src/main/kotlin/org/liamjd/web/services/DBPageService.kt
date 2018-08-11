@@ -1,6 +1,5 @@
 package org.liamjd.web.services
 
-import org.jetbrains.exposed.sql.transactions.transaction
 import org.liamjd.web.db.dao.PageDAO
 import org.liamjd.web.db.entities.BlockTypes
 import org.liamjd.web.db.entities.Blocks
@@ -8,6 +7,7 @@ import org.liamjd.web.db.entities.PageTemplates
 import org.liamjd.web.db.entities.Pages
 import org.liamjd.web.model.Block
 import org.liamjd.web.model.Page
+import org.liamjd.web.model.PageTemplate
 import org.liamjd.web.model.ref.BlockType
 
 class DBPageService : PageService {
@@ -31,6 +31,16 @@ class DBPageService : PageService {
 	override fun countPages(): Int {
 		return pageDAO.countPages()
 	}
+
+	override fun getPageTemplates(): List<PageTemplate> {
+		val pageTemplates = mutableListOf<PageTemplate>()
+		val result = pageDAO.getAllTemplates()
+		for(t in result) {
+			pageTemplates.add(PageTemplate(t.refName))
+		}
+		return pageTemplates
+	}
+
 
 	private fun toModel(found: Pages, pageTemplate: PageTemplates, blocks: Set<Blocks>): Page? {
 		val page = Page(found.refName, found.uuid)
