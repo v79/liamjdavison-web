@@ -1,6 +1,6 @@
 buildscript {
 	// declare some versions
-	ext.kotlin_version = '1.2.50'
+	ext.kotlin_version = '1.2.60'
 	ext.spark_kotlin_version = '1.0.0-alpha'
 	ext.thymeleaf_version = '3.0.9.RELEASE'
 //	ext.kodein_version = '4.1.0'
@@ -13,7 +13,7 @@ buildscript {
 }
 
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.2.50'
+    id 'org.jetbrains.kotlin.jvm' version '1.2.60'
 }
 
 group 'org.liamjd'

@@ -1,79 +1,78 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="~{fragments/head-imports :: links(pageTitle=${page.title})}"></div>
-	<body th:object="${page}">
+<body th:object="${page}">
 
-	<header th:replace="~{fragments/nav-banner}"></header>
+<header th:replace="~{fragments/nav-banner}"></header>
 
-	<div class="container">
+<div class="ff-content-container">
 
-		<!--<p cms:group="groupA">Hi ya!</p>-->
+	<!--<p cms:group="groupA">Hi ya!</p>-->
 
-		<div class="row">
-			<div class="col s8">
-				<div class="pageBody">
-					<div th:if="${page.getGroup('groupB') !=null}">
-						<p><span th:text="${page.getGroup('groupB')}">get group b</span></p>
-						<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupB')})}">page body
-							block
-						</div>
-					</div>
-				</div>
-
-				<div class="pageBody">
-					<div th:if="${page.getGroup('groupC') !=null}">
-						<p><span th:text="${page.getGroup('groupC')}">get group c</span></p>
-						<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupC')})}">page body
-							block
-						</div>
-					</div>
-				</div>
-
-
-				<hr>
-				<h3>Repeating to make the page long</h3>
-				<div class="pageBody">
-					<div th:if="${page.getGroup('groupA') !=null}">
-						<p><span th:text="${page.getGroup('groupA')}">get group a</span></p>
-						<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupA')})}">page body
-							block
-						</div>
-					</div>
-				</div>
-				<div class="pageBody">
-					<div th:if="${page.getGroup('groupA') !=null}">
-						<p><span th:text="${page.getGroup('groupA')}">get group a</span></p>
-						<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupA')})}">page body
-							block
-						</div>
-					</div>
-				</div>
-				<div class="pageBody">
-					<div th:if="${page.getGroup('groupA') !=null}">
-						<p><span th:text="${page.getGroup('groupA')}">get group a</span></p>
-						<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupA')})}">page body
-							block
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-			<div class="col m4">
-				<div class="pageBody">
-					<div th:if="${page.getGroup('groupA') !=null}">
-						<p><span th:text="${page.getGroup('groupA')}">get group a</span></p>
-						<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupA')})}">page body
-							block
-						</div>
+	<div class="row">
+		<div class="portion three-fourths">
+			<div class="pageBody">
+				<div th:if="${page.getGroup('groupB') !=null}">
+					<p><span th:text="${page.getGroup('groupB')}">get group b</span></p>
+					<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupB')})}">page body
+						block
 					</div>
 				</div>
 			</div>
 
+			<div class="pageBody">
+				<div th:if="${page.getGroup('groupC') !=null}">
+					<p><span th:text="${page.getGroup('groupC')}">get group c</span></p>
+					<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupC')})}">page body
+						block
+					</div>
+				</div>
+			</div>
+
+
+			<hr>
+			<h3>Repeating to make the page long</h3>
+			<div class="pageBody">
+				<div th:if="${page.getGroup('groupA') !=null}">
+					<p><span th:text="${page.getGroup('groupA')}">get group a</span></p>
+					<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupA')})}">page body
+						block
+					</div>
+				</div>
+			</div>
+			<div class="pageBody">
+				<div th:if="${page.getGroup('groupA') !=null}">
+					<p><span th:text="${page.getGroup('groupA')}">get group a</span></p>
+					<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupA')})}">page body
+						block
+					</div>
+				</div>
+			</div>
+			<div class="pageBody">
+				<div th:if="${page.getGroup('groupA') !=null}">
+					<p><span th:text="${page.getGroup('groupA')}">get group a</span></p>
+					<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupA')})}">page body
+						block
+					</div>
+				</div>
+			</div>
 
 		</div>
 
+		<div class="portion three-fourths">
+			<div class="pageBody">
+				<div th:if="${page.getGroup('groupA') !=null}">
+					<p><span th:text="${page.getGroup('groupA')}">get group a</span></p>
+					<div th:insert="~{fragments/blockgroup :: blockgroup(group=${page.getGroup('groupA')})}">page body
+						block
+					</div>
+				</div>
+			</div>
+		</div>
 
+	</div>
+
+	<div class="row">
 		<div id="firstBlock">
 			<ul>
 				<li th:if="${page.blocks.size gt 0}" th:each="block: ${page.blocks}">
@@ -81,23 +80,12 @@
 				</li>
 			</ul>
 		</div>
-		<hr/>
-
 	</div>
+	<hr/>
 
+</div>
 
-	<footer>
-		<table class="orange-text text-orange-darken-4">
-			<tr th:each="var : ${#ctx.getVariableNames()}">
-				<td th:text="${var}"></td>
-				<td th:text="${#vars.getVariable(var)}"></td>
-			</tr>
-		</table>
-	</footer>
-	<!--Import jQuery before materialize.js-->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<<!--script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>-->
-	<script type="text/javascript" src="/materialize/js/materialize.js"></script>
-	<script src="/js/ljd.js" type="text/javascript"></script>
-	</body>
+<footer th:replace="~{fragments/footer}"></footer>
+
+</body>
 </html>

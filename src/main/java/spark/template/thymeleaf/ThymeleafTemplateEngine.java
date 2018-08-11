@@ -39,129 +39,130 @@ import java.util.Set;
  */
 public class ThymeleafTemplateEngine extends TemplateEngine {
 
-    private static final String DEFAULT_PREFIX = "templates/";
-    private static final String DEFAULT_SUFFIX = ".html";
-    private static final long DEFAULT_CACHE_TTL_MS = 3600000L;
+	private static final String DEFAULT_PREFIX = "templates/";
+	private static final String DEFAULT_SUFFIX = ".html";
+	private static final long DEFAULT_CACHE_TTL_MS = 3600000L;
 
-    private org.thymeleaf.TemplateEngine templateEngine;
+	private org.thymeleaf.TemplateEngine templateEngine;
 
-    /**
-     * Constructs a default thymeleaf template engine.
-     * Defaults prefix (template directory in resource path) to templates/ and suffix to .html
-     */
-    public ThymeleafTemplateEngine() {
-        this(DEFAULT_PREFIX, DEFAULT_SUFFIX);
-    }
+	/**
+	 * Constructs a default thymeleaf template engine.
+	 * Defaults prefix (template directory in resource path) to templates/ and suffix to .html
+	 */
+	public ThymeleafTemplateEngine() {
+		this(DEFAULT_PREFIX, DEFAULT_SUFFIX);
+	}
 
-    /**
-     * Constructs a thymeleaf template engine with specified prefix and suffix
-     *
-     * @param prefix the prefix (template directory in resource path)
-     * @param suffix the suffix (e.g. .html)
-     */
-    public ThymeleafTemplateEngine(String prefix, String suffix) {
-        ITemplateResolver defaultTemplateResolver = createDefaultTemplateResolver(prefix, suffix);
-        initialize(defaultTemplateResolver);
-    }
+	/**
+	 * Constructs a thymeleaf template engine with specified prefix and suffix
+	 *
+	 * @param prefix the prefix (template directory in resource path)
+	 * @param suffix the suffix (e.g. .html)
+	 */
+	public ThymeleafTemplateEngine(String prefix, String suffix) {
+		ITemplateResolver defaultTemplateResolver = createDefaultTemplateResolver(prefix, suffix);
 
-    /**
-     * Constructs a thymeleaf template engine with a proprietary initialize
-     *
-     * @param templateResolver the template resolver.
-     */
-    public ThymeleafTemplateEngine(ITemplateResolver templateResolver) {
-        initialize(templateResolver);
-    }
+		initialize(defaultTemplateResolver);
+	}
 
-    private static ITemplateResolver createDefaultTemplateResolver(String prefix, String suffix) {
-        final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setTemplateMode(TemplateMode.HTML);
+	/**
+	 * Constructs a thymeleaf template engine with a proprietary initialize
+	 *
+	 * @param templateResolver the template resolver.
+	 */
+	public ThymeleafTemplateEngine(ITemplateResolver templateResolver) {
+		initialize(templateResolver);
+	}
 
-        templateResolver.setPrefix(
-                prefix != null ? prefix : DEFAULT_PREFIX
-        );
+	private static ITemplateResolver createDefaultTemplateResolver(String prefix, String suffix) {
+		final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+		templateResolver.setTemplateMode(TemplateMode.HTML);
 
-        templateResolver.setSuffix(
-                suffix != null ? suffix : DEFAULT_SUFFIX
-        );
+		templateResolver.setPrefix(
+				prefix != null ? prefix : DEFAULT_PREFIX
+		);
 
-        templateResolver.setCacheTTLMs(DEFAULT_CACHE_TTL_MS);
-        return templateResolver;
-    }
+		templateResolver.setSuffix(
+				suffix != null ? suffix : DEFAULT_SUFFIX
+		);
 
-    /**
-     * Initializes and sets the template resolver
-     */
-    private void initialize(ITemplateResolver templateResolver) {
-        templateEngine = new org.thymeleaf.TemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver);
-        templateEngine.addDialect(new Java8TimeDialect());
+		templateResolver.setCacheTTLMs(DEFAULT_CACHE_TTL_MS);
+		return templateResolver;
+	}
 
-        // custom cms dialect
+	/**
+	 * Initializes and sets the template resolver
+	 */
+	private void initialize(ITemplateResolver templateResolver) {
+		templateEngine = new org.thymeleaf.TemplateEngine();
+		templateEngine.setTemplateResolver(templateResolver);
+		templateEngine.addDialect(new Java8TimeDialect());
+
+		// custom cms dialect
 		templateEngine.addDialect(new CMSDialect());
-    }
+	}
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public String render(ModelAndView modelAndView) {
-        return render(modelAndView, Locale.getDefault());
-    }
+	@Override
+	@SuppressWarnings("unchecked")
+	public String render(ModelAndView modelAndView) {
+		return render(modelAndView, Locale.getDefault());
+	}
 
-    /**
-     * Process the specified template and the fragment with the given refName.
-     * Output will be written into a String that will be returned from calling this method,
-     * ocne template processing has finished
-     *
-     * @param modelAndView model and view
-     * @param fragment     a th:fragment component of the page
-     * @return processed template
-     */
-    public String render(ModelAndView modelAndView, String fragment) {
-        Set<String> fragments = new HashSet<String>();
-        fragments.add(fragment);
-        return render(modelAndView, fragments, Locale.getDefault());
-    }
+	/**
+	 * Process the specified template and the fragment with the given refName.
+	 * Output will be written into a String that will be returned from calling this method,
+	 * ocne template processing has finished
+	 *
+	 * @param modelAndView model and view
+	 * @param fragment     a th:fragment component of the page
+	 * @return processed template
+	 */
+	public String render(ModelAndView modelAndView, String fragment) {
+		Set<String> fragments = new HashSet<String>();
+		fragments.add(fragment);
+		return render(modelAndView, fragments, Locale.getDefault());
+	}
 
-    /**
-     * Process the specified template (usually the template refName).
-     * Output will be written into a String that will be returned from calling this method,
-     * once template processing has finished.
-     *
-     * @param modelAndView model and view
-     * @param locale       A Locale object represents a specific geographical, political, or cultural region
-     * @return processed template
-     */
-    public String render(ModelAndView modelAndView, Locale locale) {
-        Object model = modelAndView.getModel();
+	/**
+	 * Process the specified template (usually the template refName).
+	 * Output will be written into a String that will be returned from calling this method,
+	 * once template processing has finished.
+	 *
+	 * @param modelAndView model and view
+	 * @param locale       A Locale object represents a specific geographical, political, or cultural region
+	 * @return processed template
+	 */
+	public String render(ModelAndView modelAndView, Locale locale) {
+		Object model = modelAndView.getModel();
 
-        if (model instanceof Map) {
-            Context context = new Context(locale);
-            context.setVariables((Map<String, Object>) model);
-            return templateEngine.process(modelAndView.getViewName(), context);
-        } else {
-            throw new IllegalArgumentException("modelAndView.getModel() must return a java.util.Map");
-        }
-    }
+		if (model instanceof Map) {
+			Context context = new Context(locale);
+			context.setVariables((Map<String, Object>) model);
+			return templateEngine.process(modelAndView.getViewName(), context);
+		} else {
+			throw new IllegalArgumentException("modelAndView.getModel() must return a java.util.Map");
+		}
+	}
 
-    /**
-     * Process the specified template and the fragment with the given refName.
-     * Output will be written into a String that will be returned from calling this method,
-     * ocne template processing has finished
-     *
-     * @param modelAndView model and view
-     * @param fragments    a Set of th:fragment components of the page
-     * @param locale       A Locale object represents a specific geographical, political, or cultural region
-     * @return processed template
-     */
-    public String render(ModelAndView modelAndView, Set<String> fragments, Locale locale) {
-        Object model = modelAndView.getModel();
+	/**
+	 * Process the specified template and the fragment with the given refName.
+	 * Output will be written into a String that will be returned from calling this method,
+	 * ocne template processing has finished
+	 *
+	 * @param modelAndView model and view
+	 * @param fragments    a Set of th:fragment components of the page
+	 * @param locale       A Locale object represents a specific geographical, political, or cultural region
+	 * @return processed template
+	 */
+	public String render(ModelAndView modelAndView, Set<String> fragments, Locale locale) {
+		Object model = modelAndView.getModel();
 
-        if (model instanceof Map) {
-            Context context = new Context(locale);
-            context.setVariables((Map<String, Object>) model);
-            return templateEngine.process(modelAndView.getViewName(), fragments, context);
-        } else {
-            throw new IllegalArgumentException("modelAndView.getModel() must return a java.util.Map");
-        }
-    }
+		if (model instanceof Map) {
+			Context context = new Context(locale);
+			context.setVariables((Map<String, Object>) model);
+			return templateEngine.process(modelAndView.getViewName(), fragments, context);
+		} else {
+			throw new IllegalArgumentException("modelAndView.getModel() must return a java.util.Map");
+		}
+	}
 }

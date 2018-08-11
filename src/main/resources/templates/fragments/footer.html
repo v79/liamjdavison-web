@@ -1,0 +1,16 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<footer>
+	<div class="row">
+		<div class="portion half">
+			<table class="ff-table padding-small bordered-rows">
+				<tr th:each="var : ${#ctx.getVariableNames()}">
+					<td th:text="${var}"></td>
+					<td th:text="${#vars.getVariable(var)}"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js" type="text/javascript"></script>
+	<script src="/js/ljd.js" type="text/javascript"></script>
+</footer>

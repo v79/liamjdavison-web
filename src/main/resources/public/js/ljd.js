@@ -2,19 +2,11 @@
 scrollTop() >= 300
 Should be equal the the height of the header
 ========================================== */
-$(document).ready(function () {
-	// the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-	$('.modal').modal({
-		dismissible: true
-	});
-	Materialize.updateTextFields();
-});
 
-$(window).scroll(function () {
-	var nav = $('nav')
-	if ($(window).scrollTop() >= 300) {
+window.onscroll = function (el) {
+	var nav = $('nav');
+	if (window.pageYOffset >= 240) {
 		// we have scrolled down the page
-
 		nav.addClass('fixed-header');
 		nav.removeClass('translucent');
 		nav.addClass('opaque');
@@ -28,50 +20,73 @@ $(window).scroll(function () {
 		nav.addClass('translucent');
 		nav.removeClass('opaque');
 
-
 		$('#site-title').addClass('invisible');
 
 	}
+};
+
+$('#login').click(function () {
+	var showThis = this.dataset.modal;
+	showModal(showThis);
 });
 
+$('.js-close-modal').click(function () {
+	var closeThis = this.dataset.modal;
+	hideModal(closeThis);
+});
 
-
-// generic function to open a modal dialog. Specify the controller path which will supply the view, and the HTML divs to update
-function openModal(sparkPath, dataDiv, containerDiv) {
-	$.ajax({
-		url: sparkPath,
-		success: function (data) {
-			$(dataDiv).html(data);
-			$(containerDiv).modal('open')
-		}
-	});
+function showModal(modalName) {
+	$('#' + modalName).addClass('active');
 }
 
-// Security and authentication
+function hideModal(modalName) {
+	$('#' + modalName).removeClass('active');
+}
+
 function authenticate() {
-	validate("/auth/validateLogin", "login_form", "login_modal", "/")
+	validate("/auth/validateLogin", "login_form", "login_form_validate", "/");
 }
+
 
 // Call the validation route given in validatorPath to validate the form in formName.
 // If validation fails, update containerDiv through AJAX.
 // If it succeeds, redirect to the given route
 function validate(validatorPath, formName, containerDiv, redirectPath) {
-	var serializedData = $(formName).serialize();
-	console.log(formName + " posted with " + serializedData);
+	var serializedData = $('#' + formName).serialize();
+	console.log(serializedData);
 	// first, post to validator
+	var error = false;
 	$.ajax({
 		url: validatorPath,
 		method: 'post',
 		data: serializedData,
 		success: function (response, statusText, xhr) {
-			// if valid, move on to next action
-			if (!response) {
-				window.location.href = redirectPath
+			// console.log("response: " + response);
+			// console.log("statusText: " + statusText);
+			// console.log("xhr: " + xhr);
+			if(typeof response=="object") {
+				// console.log("It's probably JSON!");
+				// var errorMap = JSON.parse(response);
+				// console.log(JSON.stringify(errorMap));
+
+				for(let e of response['errors']) {
+					let field = e['field'];
+					let message = e['message'];
+					console.log("setting " + field  + " -> " + message);
+					$('#' + field).get(0).setCustomValidity(message);
+					$('#' + field + '~ p').html(message);
+				}
+
+
 			} else {
-				// if in error, form should be re-rendered
-				$('#' + containerDiv).html(response);
-				Materialize.updateTextFields();
+				// if valid, move on to next action
+				window.location.href = redirectPath
 			}
 		}
 	});
+}
+
+// Call validation by providing an object to use named parameters
+function validateAndRedirect(params) {
+	validate(params.validator, params.form, params.div, params.success);
 }
