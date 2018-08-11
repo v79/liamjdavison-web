@@ -10,11 +10,14 @@
 				<div class="portion one-fourth one-eighth-on-mobile padding-bottom-none padding-top-none">
 					<h3 class="site-title invisible text-white" id="site-title">Liam John Davison</h3>
 				</div>
-				<div class="portion two-thirds pull-right padding-bottom-none padding-top-none">
+				<div class="portion pull-right padding-bottom-none padding-top-none">
 					<ul id="nav-mobile">
-						<li><a href="/archive">Archive</a></li>
+						<li><a href="/about">About Me</a></li>
 						<li><a href="/events">Events</a></li>
-						<li><a data-modal="login_modal" id="login" class="js-open-modal">Login</a></li>
+
+						<li><a th:if="${¤¤user¤¤} != null" href="/auth/user" th:text="${¤¤user¤¤}" id="nav_username">username</a>
+							<a th:if="${¤¤user¤¤} == null" data-modal="login_modal" id="login" class="js-open-modal">Login</a>
+						</li>
 					</ul>
 				</div>
 			</div>

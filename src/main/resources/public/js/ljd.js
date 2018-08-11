@@ -44,7 +44,7 @@ function hideModal(modalName) {
 }
 
 function authenticate() {
-	validate("/auth/validateLogin", "login_form", "login_form_validate", "/auth/loggedIn");
+	validate("/auth/validateLogin", "login_form", "login_form_validate", "/");
 }
 
 
@@ -55,7 +55,7 @@ function validate(validatorPath, formName, containerDiv, redirectPath) {
 	var serializedData = $('#' + formName).serialize();
 	console.log(serializedData);
 	// first, post to validator
-	var error = false
+	var error = false;
 	$.ajax({
 		url: validatorPath,
 		method: 'post',
