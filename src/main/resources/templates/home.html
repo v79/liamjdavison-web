@@ -70,7 +70,6 @@
 			</div>
 		</div>
 
-
 	</div>
 
 	<div class="row">
@@ -86,21 +85,7 @@
 
 </div>
 
+<footer th:replace="~{fragments/footer}"></footer>
 
-<footer>
-	<div class="row">
-		<div class="portion half">
-		<table class="">
-			<tr th:each="var : ${#ctx.getVariableNames()}">
-				<td th:text="${var}"></td>
-				<td th:text="${#vars.getVariable(var)}"></td>
-			</tr>
-		</table>
-		</div>
-	</div>
-</footer>
-
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js" type="text/javascript"></script>
-<script src="/js/ljd.js" type="text/javascript"></script>
 </body>
 </html>

@@ -61,7 +61,6 @@ abstract class AbstractController(path: String) {
 
 		notFound { "404 not found?"}
 
-
 	}
 
 	fun debugParams(request: Request) {
