@@ -9,10 +9,10 @@ import spark.kotlin.before
 import spark.kotlin.notFound
 import spark.template.thymeleaf.ThymeleafTemplateEngine
 
-typealias ErrorMap = HashMap<String,String>
 /**
  * Turn a simple map of strings into a JSON format string
  */
+typealias ErrorMap = HashMap<String,String>
 fun ErrorMap.toJson(): String {
 	var sb = StringBuilder()
 	sb.append("{")
@@ -35,6 +35,11 @@ fun ErrorMap.toJson(): String {
 	return sb.toString()
 }
 
+enum class Mode {
+	VIEW,
+	EDIT,
+	PREVIEW
+}
 
 abstract class AbstractController(path: String) {
 	open val logger = LoggerFactory.getLogger(AbstractController::class.java)
@@ -49,14 +54,10 @@ abstract class AbstractController(path: String) {
 	init {
 		before {
 			model.clear()
-			logger.info("Request for " + request.pathInfo())
-			logger.info("Session user is " + session().attribute("user"))
-
+			model.put("__mode", Mode.VIEW) // default to viewing
 			debugSession(session())
 
 			if(!session().attribute<String>("user").isNullOrBlank()) {
-//				val user = authService.getUser(session().attribute("user"))
-//				user?.username?.let { model.put("¤¤user¤¤", it) }
 				model.put("__user",session().attribute("user"))
 			}
 		}

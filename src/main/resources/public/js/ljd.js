@@ -48,6 +48,12 @@ function createPage() {
 	validate("/edit/validateCreatePage","new_page_form","new_page_form_validate",null);
 }
 
+$('#editnav_editPage').click( function() {
+	var currentPage = window.location.pathname.split('/').pop()
+	console.log("redirecting to /edit/" + currentPage)
+	// window.location.href = '/edit/' + currentPage;
+});
+
 /** Modal functions **/
 $('.js-close-modal').click(function () {
 	var closeThis = this.dataset.modal;

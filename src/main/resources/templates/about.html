@@ -5,11 +5,12 @@
 
 <header th:replace="~{fragments/nav-banner}"></header>
 
-<div class="ff-content-container">
+<div class="ff-content-container" th:classappend="${__mode.toString() == 'EDIT'}? ' border-orange'">
 
 	<div class="row">
 		<div class="portion three-fourths">
 			<div class="pageBody">
+				<p th:inline="text">mode is [[${__mode}]]</p>
 				<!-- groups go here -->
 				<div th:each="pageBlock : ${page.blocks}">
 					<div th:insert="~{fragments/block :: blockFragment(block=${pageBlock})}">page body block</div>

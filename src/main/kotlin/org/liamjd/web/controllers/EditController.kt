@@ -4,6 +4,8 @@ import org.liamjd.caisson.extensions.bind
 import org.liamjd.web.annotations.AsJSON
 import org.liamjd.web.annotations.SparkController
 import org.liamjd.web.services.DBPageService
+import spark.ModelAndView
+import spark.kotlin.before
 import spark.kotlin.get
 import spark.kotlin.post
 
@@ -14,6 +16,15 @@ class EditController : AbstractController("edit") {
 	val pageService = DBPageService()
 
 	init {
+
+		before("$path/*") {
+			println("authenticate all edit requests?")
+			if(session().attribute<String>("user").isNullOrBlank()) {
+				logger.error("Unauthorised request to ${request.pathInfo()} made. Redirecting to home")
+				redirect("/")
+			}
+		}
+
 		@AsJSON
 		get("$path/getPageTemplates") {
 			val pageTemplates = pageService.getPageTemplates()
@@ -59,7 +70,20 @@ class EditController : AbstractController("edit") {
 				// now, create our page
 				val page = pageService.createPage(form.refName, form.title, form.pageTemplateName)
 
-				redirect("/${page.refName}")
+				redirect("${path}/${page.refName}")
+			}
+		}
+
+		get("$path/:pageName") {
+
+			model.put("__mode",Mode.EDIT)
+			val page = pageService.getPage(request.params("pageName"))
+
+			if(page != null) {
+				model.put("page", page)
+				engine.render(ModelAndView(model, page.templateName))
+			} else {
+				"Page ${request.params("pageName")} not found"
 			}
 		}
 	}

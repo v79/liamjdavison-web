@@ -1,87 +1,105 @@
 .pageBody {
-    background-color: #adb1dd;
+  background-color: #adb1dd;
 }
 
 /* resets */
-body { margin:0px; padding:0px; }
+body {
+  margin: 0px;
+  padding: 0px;
+}
 
 /* main */
 header {
-    /*   height: 360px;*/
-    z-index: 10;
+  /*   height: 360px;*/
+  z-index: 10;
 }
+
 .header-banner {
-    background: #333 url("/assets/driftwood_banner.png") no-repeat center;
-    background-size: cover;
-    width: 100%;
-    height: 300px;
+  background: #333 url("/assets/driftwood_banner.png") no-repeat center;
+  background-size: cover;
+  width: 100%;
+  height: 300px;
 }
 
 header h1 {
-    background-color: rgba(113, 117, 134, 0.5);
-    color: #fff;
-    padding: 0 1rem;
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
+  background-color: rgba(113, 117, 134, 0.5);
+  color: #fff;
+  padding: 0 1rem;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
 }
 
 .fixed-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 nav {
-    width: 100%;
-    height: 60px;
-    /*   background: #292f36;*/
-    postion: fixed;
-    z-index: 10;
+  width: 100%;
+  height: 60px;
+  /*   background: #292f36;*/
+  position: fixed;
+  z-index: 10;
 }
 
 .invisible {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .translucent {
-    background-color: rgba(41,47,54,0.4);
-    margin-top: -60px;
-    transition: background-color 1s, margin-top 0.5s;
+  background-color: rgba(41, 47, 54, 0.4);
+  margin-top: -60px;
+  transition: background-color 1s, margin-top 0.5s;
 }
+
 .opaque {
-    background-color: rgba(41,47,54,1);
-    transition: background-color 1s, margin-top 0.2s;
+  background-color: rgba(41, 47, 54, 1);
+  transition: background-color 1s, margin-top 0.2s;
 }
-
-
 
 .visible-title {
-    visibility: visible;
+  visibility: visible;
 }
 
 nav ul {
-    list-style-type: none;
-    margin: 0 2% auto 0;
-    padding-left: 0;
-    text-align: right;
-    max-width: 100%;
+  list-style-type: none;
+  margin: 0 2% auto 0;
+  padding-left: 0;
+  text-align: right;
+  max-width: 100%;
 }
+
 nav ul li {
-    display: inline-block;
-    line-height: 60px;
-    margin-left: 10px;
+  display: inline-block;
+  line-height: 60px;
+  margin-left: 10px;
 }
+
 nav ul li a {
-    text-decoration: none;
-    color: #a9abae;
+  text-decoration: none;
+  color: #a9abae;
 }
 
 .padding-bottom-none {
-  padding-bottom: 0px!important;
-}
-.padding-top-none {
-  padding-top: 0px!important;
+  padding-bottom: 0px !important;
 }
 
+.padding-top-none {
+  padding-top: 0px !important;
+}
+
+/** Page editing styles **/
+.cms_border_edit {
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: $editPageFrameColour;
+}
