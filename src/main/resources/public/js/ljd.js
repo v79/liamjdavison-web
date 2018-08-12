@@ -13,7 +13,6 @@ window.onscroll = function (el) {
 		nav.addClass('opaque');
 
 		$('#site-title').removeClass('invisible');
-
 	}
 	else {
 		// we are at the top of the page
@@ -22,7 +21,6 @@ window.onscroll = function (el) {
 		nav.removeClass('opaque');
 
 		$('#site-title').addClass('invisible');
-
 	}
 };
 
@@ -46,6 +44,10 @@ $('#editnav_newPage').click(function () {
 	showModal(showThis)
 });
 
+function createPage() {
+	validate("/edit/validateCreatePage","new_page_form","new_page_form_validate",null);
+}
+
 /** Modal functions **/
 $('.js-close-modal').click(function () {
 	var closeThis = this.dataset.modal;
@@ -64,7 +66,7 @@ function hideModal(modalName) {
 // Call the validation route given in validatorPath to validate the form in formName.
 // If validation fails, update containerDiv through AJAX.
 // If it succeeds, redirect to the given route
-function validate(validatorPath, formName, containerDiv, redirectPath) {
+function validate(validatorPath, formName, containerDiv , redirectPath) {
 	var serializedData = $('#' + formName).serialize();
 	console.log(serializedData);
 	// first, post to validator

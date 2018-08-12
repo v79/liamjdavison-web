@@ -1,8 +1,6 @@
 package org.liamjd.web.db.dao
 
-import org.jetbrains.exposed.sql.and
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.liamjd.web.db.AbstractDao
 import org.liamjd.web.db.Dao
@@ -79,5 +77,24 @@ class PageDAO : AbstractDao(), Dao {
 		}
 
 		return list
+	}
+
+	fun createPage(refName: String, title: String, pageTemplateName: String): Pages {
+		val newPage: Pages
+		newPage = transaction {
+			addLogger(StdOutSqlLogger)
+			val template = PAGE_TEMPLATE.slice(PAGE_TEMPLATE.id)
+					.select { PAGE_TEMPLATE.refName eq pageTemplateName }
+					.first()
+			Pages.new {
+				this.refName = refName
+				this.title = title
+				this.dirty = true
+				this.template = PageTemplates.wrapRow(template)
+			}
+
+		}
+
+		return newPage
 	}
 }

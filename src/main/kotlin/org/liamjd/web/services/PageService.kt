@@ -11,4 +11,8 @@ interface PageService {
 	fun countPages() : Int
 
 	fun getPageTemplates() : List<PageTemplate>
+
+	fun isUniqueRef(refName: String) : Boolean
+
+	fun createPage(refName: String, title: String, pageTemplateName: String): Page
 }

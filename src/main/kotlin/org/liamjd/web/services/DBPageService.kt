@@ -41,6 +41,19 @@ class DBPageService : PageService {
 		return pageTemplates
 	}
 
+	override fun isUniqueRef(refName: String): Boolean {
+		val pages = pageDAO.getPage(refName)
+		if(pages != null) {
+			return false
+		}
+		return true
+	}
+
+	override fun createPage(refName: String, title: String, pageTemplateName: String): Page {
+		val pages = pageDAO.createPage(refName, title, pageTemplateName)
+
+		return getPage(pages.refName)!!
+	}
 
 	private fun toModel(found: Pages, pageTemplate: PageTemplates, blocks: Set<Blocks>): Page? {
 		val page = Page(found.refName, found.uuid)

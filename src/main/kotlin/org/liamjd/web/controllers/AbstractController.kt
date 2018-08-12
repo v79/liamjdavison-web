@@ -9,10 +9,11 @@ import spark.kotlin.before
 import spark.kotlin.notFound
 import spark.template.thymeleaf.ThymeleafTemplateEngine
 
+typealias ErrorMap = HashMap<String,String>
 /**
  * Turn a simple map of strings into a JSON format string
  */
-fun MutableMap<String, String>.toJson(): String {
+fun ErrorMap.toJson(): String {
 	var sb = StringBuilder()
 	sb.append("{")
 	sb.append("\"errors\": [")
@@ -46,8 +47,8 @@ abstract class AbstractController(path: String) {
 	open val authService = FakeAuthService()
 
 	init {
-
 		before {
+			model.clear()
 			logger.info("Request for " + request.pathInfo())
 			logger.info("Session user is " + session().attribute("user"))
 
@@ -57,8 +58,6 @@ abstract class AbstractController(path: String) {
 //				val user = authService.getUser(session().attribute("user"))
 //				user?.username?.let { model.put("¤¤user¤¤", it) }
 				model.put("__user",session().attribute("user"))
-			} else {
-				model.remove("__user")
 			}
 		}
 

@@ -28,15 +28,15 @@ class SecurityController : AbstractController("/auth") {
 		post(path + "/validateLogin") {
 			debugParams(request)
 			val userDetails = request.bind<AuthUser>()
-			val errorMap = mutableMapOf<String, String>()
+			val errorMap = ErrorMap()
 			if (userDetails?.password?.length!! < 6) {
 				errorMap.put("password", "At least 6 characters long")
 			}
 			if (userDetails.username.isBlank()) {
 				errorMap.put("username", "Username cannot be blank")
 			}
-			model.put("errors", errorMap)
 			if (errorMap.isNotEmpty()) {
+				model.put("errors", errorMap)
 				response.type("application/json")
 				logger.info("returning error map")
 				logger.info(errorMap.toJson())

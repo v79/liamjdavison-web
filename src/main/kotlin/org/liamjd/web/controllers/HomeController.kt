@@ -11,15 +11,16 @@ class HomeController : AbstractController(path = "/") {
 
 	val pageService: PageService
 
-
 	init {
 		// TODO this should happen via DI eventually
 		pageService = DBPageService()
+		val pageTemplates = pageService.getPageTemplates()
+		val pageCount = pageService.countPages()
+
 
 		get(path) {
 			val homePage = pageService.getPage("home")
-
-			pageService.countPages()
+			model.put("pageTemplates",pageTemplates)
 
 			if (homePage != null) {
 				model.put("page", homePage)
@@ -31,6 +32,8 @@ class HomeController : AbstractController(path = "/") {
 
 		get("/:pageName") {
 			val page = pageService.getPage(request.params("pageName"))
+			model.put("pageTemplates",pageTemplates)
+
 			if(page != null) {
 				model.put("page", page)
 				engine.render(ModelAndView(model, page.templateName))
