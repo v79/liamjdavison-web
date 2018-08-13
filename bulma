@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cinnabar</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+  <!-- Bulma Version 0.7.1-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/admin.css">
+</head>
+
+<body>
+
+<header>
+  <div>Heading image goes here</div>
+</header>
+
+<!-- primary navigation -->
+<nav class="navbar is-white">
+  <div class="container">
+    <a class="navbar-item brand-text" href="#">Cinnabar</a>
+  </div>
+</nav>
+
+<div id="popoutTree" class="modal-sidebar-left">
+  <p>Modal sidebar thingy</p>
+</div>
+
+<section id="navAndActions">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <nav class="navbar">
+          <div id="actionMenu" class="navbar-menu">
+            <div class="navbar-start">
+              <a class="navbar-item" id="allPages">All pages</a>
+              <a class="navbar-item" href="#">New</a>
+              <a class="navbar-item" href="#">Edit</a>
+              <a class="navbar-item" href="#">Delete</a>
+              <a class="navbar-item" href="#">Move</a>
+            </div>
+            <div class="navbar-end">
+              <div class="control has-icons-left">
+                <input class="input" type="text" placeholder="Page search">
+                <span class="icon is-medium is-left">
+                      <i class="fa fa-search"></i>
+                    </span>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+          <ul>
+            <li><a href="../">Bulma</a></li>
+            <li><a href="../">Templates</a></li>
+            <li><a href="../">Examples</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Admin</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pageContent">
+  <div class="container">
+    <div class="columns">
+      <div class="column is--four-fifths">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et ex dictum, vehicula augue sed, maximus
+          massa. Vestibulum sed venenatis ante. Pellentesque volutpat nisl nibh, nec interdum nunc porttitor aliquam.
+          Morbi accumsan facilisis purus, sit amet consequat lorem blandit non. Nam pharetra pharetra metus, eu cursus
+          lectus eleifend a. Quisque nulla felis, congue vitae enim at, dictum porta urna. Aenean faucibus massa quis
+          hendrerit ultricies. In finibus odio leo, ut consectetur dui facilisis ut.</p>
+
+        <p>Ut suscipit nibh non massa sodales venenatis. Cras elementum quam nisi, dignissim dapibus massa consectetur
+          malesuada. Integer luctus, enim ac suscipit facilisis, sem libero posuere velit, id efficitur libero justo
+          eget eros. Integer malesuada tellus vel viverra laoreet. Proin auctor efficitur nisl porta facilisis. Morbi
+          vehicula est sed risus feugiat luctus. Ut blandit nibh magna, sed facilisis ante dapibus pellentesque. Vivamus
+          eget odio eget ligula pharetra viverra hendrerit ac velit. In placerat enim eget velit interdum vestibulum. Ut
+          fringilla dignissim justo. Etiam tempus tempus efficitur. Morbi in ante turpis. Donec et scelerisque quam, ut
+          finibus magna. Mauris non sollicitudin leo, vel iaculis lorem.</p>
+
+        <p>Integer quam turpis, viverra vitae finibus in, auctor fringilla dolor. Fusce mollis, dolor eu pharetra
+          tincidunt, nunc lectus ullamcorper ipsum, nec aliquam mi mi at metus. Aenean condimentum libero id
+          pellentesque
+          vehicula. Curabitur ut condimentum turpis, eget iaculis est. Donec hendrerit accumsan tempus. Maecenas mattis
+          aliquet odio a bibendum. Etiam elementum viverra sapien, ac efficitur nisl dignissim id.</p>
+
+        <p>Fusce pellentesque dui in ante vulputate fringilla. Donec tortor elit, commodo sed dui vel, vulputate
+          consectetur est. Etiam eu tincidunt mi, vehicula dapibus augue. Nulla non convallis ante. Nam eu accumsan sem,
+          vitae mattis elit. Donec aliquam, elit nec porta interdum, lacus massa gravida est, non imperdiet urna sapien
+          a eros. Pellentesque sit amet aliquet dui. Curabitur porttitor, ex at sodales aliquet, ipsum libero auctor
+          urna, nec efficitur massa purus vel sapien. Nullam nec nisi a turpis tristique iaculis. Phasellus vel egestas
+          mi. Nam fringilla ornare diam, sed fringilla lectus consectetur pretium. Integer in urna at eros viverra
+          cursus.</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent congue et metus ac viverra. Aliquam laoreet
+          ornare scelerisque. Quisque aliquam, sapien varius dapibus hendrerit, neque nibh tristique elit, vel
+          vestibulum turpis urna sit amet urna. Aenean ullamcorper gravida mollis. Donec faucibus pulvinar orci et
+          congue. Pellentesque posuere tincidunt mi, sit amet gravida eros porttitor ac. Proin accumsan viverra
+          interdum. Nam interdum quis libero vitae consectetur.</p>
+      </div>
+      <div class="column is-one-fifth">
+        <div class="card">
+          <div class="card-content">
+            <p class="title">
+              “There are two hard things in computer science: cache invalidation, naming things, and off-by-one errors.”
+            </p>
+            <p class="subtitle">
+              Jeff Atwood
+            </p>
+          </div>
+          <footer class="card-footer">
+            <p class="card-footer-item">Learn more...</p>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div><p>Footer goes here</p></div>
+</footer>
+</body>
+<script async type="text/javascript" src="../js/bulma.js"></script>
+</html>
