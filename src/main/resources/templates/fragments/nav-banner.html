@@ -1,5 +1,36 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <header>
+
+	<div class="level">
+		<div class="level-left">
+			<h1 class="is-size-1 is-size-3-mobile">Cinnabar</h1>
+		</div>
+		<div class="level-right">
+			Menu
+		</div>
+	</div>
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-menu">
+			<a class="navbar-item"><i class="material-icons md-36">toc</i>Page list</a>
+			<a class="navbar-item"><i class="material-icons md-36">add</i>New page</a>
+			<a class="navbar-item"><i class="material-icons md-36">edit</i>Edit<</a>
+			<a class="navbar-item"><i class="material-icons md-36">delete</i>Delete</a>
+			<a class="navbar-item"><i class="material-icons md-36">low_priority</i>Move</a>
+		</div>
+	</nav>
+
+
+</header>
+
+
+
+
+
+
+
+
+
+<!--
 	<div class="header-banner">
 		<h1 class="hide-on-mobile">Liam John Davison</h1>
 	</div>
@@ -15,19 +46,19 @@
 						<li class="nav-item"><a href="/">Home</a></li>
 						<li class="nav-item"><a href="/about">About Me</a></li>
 						<li class="nav-item"><a href="/events">Events</a></li>
-						<!--<li><a data-modal="login_modal" id="login" class="js-open-modal">Login</a></li>-->
+						&lt;!&ndash;<li><a data-modal="login_modal" id="login" class="js-open-modal">Login</a></li>&ndash;&gt;
 						<li class="nav-item"><a th:if="${__user != null}" href="/auth/user" th:text="${__user}" id="nav_username">username</a>
 							<a th:if="${__user == null}" data-modal="login_modal" id="login" class="js-open-modal">Login</a>
 						</li>
-						<!--<li><a th:if="${session.attribute('user') != null}" href="/auth/user" th:text="${session.attribute('user')}" id="nav_username">username</a>
-						<a th:if="${session.attribute('user') == null}" data-modal="login_modal" id="login" class="js-open-modal">Login</a>-->
+						&lt;!&ndash;<li><a th:if="${session.attribute('user') != null}" href="/auth/user" th:text="${session.attribute('user')}" id="nav_username">username</a>
+						<a th:if="${session.attribute('user') == null}" data-modal="login_modal" id="login" class="js-open-modal">Login</a>&ndash;&gt;
 					</ul>
 				</div>
 			</div>
 		</div>
 	</nav>
-</header>
+</header>-->
 
-<div th:include="~{fragments/edit/nav-edit}"></div>
+<!--<div th:include="~{fragments/edit/nav-edit}"></div>
 <div th:replace="~{fragments/edit/new-page-modal}"></div>
-<div th:replace="~{fragments/login-modal-dialog}"></div>
+<div th:replace="~{fragments/login-modal-dialog}"></div>-->
